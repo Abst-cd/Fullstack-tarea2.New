@@ -35,6 +35,7 @@ function render(){
 
         const botonEditar = document.createElement('button');
         botonEditar.textContent = 'Editar';
+        botonEditar.classList.add('boton-editar');
         objetodeLista.appendChild(botonEditar);
 
         botonEditar.addEventListener('click', () => {
@@ -49,12 +50,13 @@ function render(){
 
         const botonElimEspecifico = document.createElement('button');
         botonElimEspecifico.textContent = 'Eliminar';
+        botonElimEspecifico.classList.add('boton-eliminar-especifico');
         objetodeLista.appendChild(botonElimEspecifico);
 
         botonElimEspecifico.addEventListener('click', () => {
             gestor.lista.splice(index, 1);
             render();
-        });
+        }); 
 
         objetodeLista.addEventListener('dblclick', (e) => {
             objetodeLista.classList.toggle('destacado');
