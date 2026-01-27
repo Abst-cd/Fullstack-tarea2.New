@@ -1,0 +1,17 @@
+body {
+    background-color: bisque;
+}
+
+#agregarInputsaLista, #eliminaUltimaTarea, #vaciaTodasTareas {
+    margin-top: 10px;
+    padding: 5px 10px;
+    font-size: 16px;
+}
+
+
+
+
+.destacado {
+    color: red;
+    font-weight: bold;
+}
