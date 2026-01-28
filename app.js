@@ -1,3 +1,5 @@
+import Tarea from './Tarea.js'
+
 
 const lista = document.getElementById('lista');
 const inputdelista = document.getElementById('inputsDeListaENTRADA');
@@ -6,31 +8,34 @@ const botonEliminar = document.getElementById('eliminaUltimaTarea');
 const botonVaciarTareas = document.getElementById('vaciaTodasTareas');
 
 
+/* class gestor de tareas para gestionar las tareas */
 class GestordeTareas{
     constructor(){
         this.lista = [];
     }
 
     agregarTarea(input){
-        this.lista.push(input.value);      
+        this.lista.push(new Tarea(input.value));
         input.value = '';  
     }
 
     eliminarTarea(){
         this.lista.pop();
     }
-
+    eliminarTareaEspecifica(index){
+        this.lista.splice(index, 1);
+    }
     vaciarTareas(){
         this.lista = [];
     }
 
 }
 
-function render(){
+    function render(){
     lista.innerHTML = '';
     gestor.lista.forEach((tarea, index) => {   
         const objetodeLista = document.createElement('li');
-        objetodeLista.textContent = tarea;
+        objetodeLista.textContent = tarea.texto;
         lista.appendChild(objetodeLista);
 
         const botonEditar = document.createElement('button');
@@ -39,12 +44,10 @@ function render(){
         objetodeLista.appendChild(botonEditar);
 
         botonEditar.addEventListener('click', () => {
-            const nuevoTexto = prompt('Editar tarea:', tarea);
-            if (nuevoTexto === ''){
-                alert('La tarea no puede estar vacía.');
-                return;
+            const nuevoTexto = prompt('Editar tarea:', tarea.texto);
+            if (nuevoTexto !== null && nuevoTexto.trim() !== '') {
+                tarea.editar(nuevoTexto);
             }
-            gestor.lista[index] = nuevoTexto.trim();
             render();
         });
 
@@ -100,5 +103,8 @@ botonVaciarTareas.addEventListener('click', () => {
     gestor.vaciarTareas();
     render();
 });
+
+
+
 
 
